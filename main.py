@@ -8,26 +8,29 @@ framebuffer_height = 600
 framebuffer = [Color(0, 0, 0)] * (framebuffer_width * framebuffer_height)
 
 clearColor = Color(0, 0, 0)  # Color de fondo
-currentColor = Color(255, 255, 255)  # Color actual
+fillColor = Color(255, 165, 0)  # Color de relleno
+borderColor = Color(255, 255, 255)  # Color de la orilla
 
 def render():
     clear()
 
     # Definir los vértices del polígono
     vertices = [
-        Vertex2(100, 100),
-        Vertex2(200, 200),
-        Vertex2(200, 400),
-        Vertex2(300, 300),
-        Vertex2(400, 400),
-        Vertex2(400, 200)
+        Vertex2(165, 380),
+        Vertex2(185, 360),
+        Vertex2(180, 330),
+        Vertex2(207, 345),
+        Vertex2(233, 330),
+        Vertex2(230, 360),
+        Vertex2(250, 380),
+        Vertex2(220, 385),
+        Vertex2(205, 410),
+        Vertex2(193, 383)
     ]
 
-    # Dibujar el polígono
-    drawPolygon(vertices)
-
-    # Rellenar el polígono
-    fillPolygon(vertices)
+    # Dibujar y rellenar el polígono con un grosor de orilla de 2 píxeles
+    drawPolygon(vertices, fillColor, borderColor, 60)
+    fillPolygon(vertices, fillColor)
 
     # Renderizar el buffer
     renderBuffer()
