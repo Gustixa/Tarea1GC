@@ -109,7 +109,7 @@ def renderBuffer():
     colors = 0  # Número de colores en la paleta, 0 para paleta completa
     important_colors = 0  # Número de colores importantes, 0 para todos
 
-    with open('poligono-3.bmp', 'wb') as f:
+    with open('poligono3.bmp', 'wb') as f:
         f.write(b'BM')
         f.write(file_size.to_bytes(4, 'little'))
         f.write(reserved.to_bytes(4, 'little'))
