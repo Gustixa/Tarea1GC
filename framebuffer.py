@@ -6,7 +6,8 @@ framebuffer_height = 600
 
 framebuffer = [Color(0, 0, 0)] * (framebuffer_width * framebuffer_height)
 
-clearColor = Color(0, 0, 0)  # Color de fondo
+clearColor = Color(30, 30, 30)  # Color de fondo
+currentColor = None
 
 def clear():
     global framebuffer
@@ -37,7 +38,8 @@ def line(x0, y0, x1, y1, color, width):
     err = dx - dy
 
     while True:
-        point(Vertex2(x0, y0), color if isBorder(x0, y0, x1, y1, width) else clearColor)
+        for i in range(width):
+            point(Vertex2(x0, y0 + i), color)  # Dibujar píxel en la posición actual más el desplazamiento vertical
 
         if x0 == x1 and y0 == y1:
             break
@@ -49,11 +51,6 @@ def line(x0, y0, x1, y1, color, width):
         if e2 < dx:
             err += dx
             y0 += sy
-
-def isBorder(x, y, x0, y0, width):
-    dx = abs(x - x0)
-    dy = abs(y - y0)
-    return dx <= width or dy <= width
 
 def drawPolygon(vertices, fillColor, borderColor, borderWidth):
     for i in range(len(vertices)):
@@ -93,7 +90,6 @@ def fillPolygon(vertices, fillColor):
             for x in range(start_x, end_x + 1):
                 point(Vertex2(x, y), fillColor)
 
-
 def renderBuffer():
     global framebuffer
 
@@ -113,7 +109,7 @@ def renderBuffer():
     colors = 0  # Número de colores en la paleta, 0 para paleta completa
     important_colors = 0  # Número de colores importantes, 0 para todos
 
-    with open('poligono-1.bmp', 'wb') as f:
+    with open('poligono-2.bmp', 'wb') as f:
         f.write(b'BM')
         f.write(file_size.to_bytes(4, 'little'))
         f.write(reserved.to_bytes(4, 'little'))
